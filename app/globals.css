@@ -1,26 +1,690 @@
 @import "tailwindcss";
 
+/* ============================================================
+   DESIGN SYSTEM — Based on DESIGN.md (Vodafone-inspired)
+   Font: Inter (substitute for proprietary Vodafone typeface)
+   ============================================================ */
+
+/* ----- 1. Color Tokens ----- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary */
+  --color-primary: #e60000;            /* Vodafone Red — CTAs, dividers, brand marks */
+
+  /* Secondary & Accent */
+  --color-white: #ffffff;              /* Editorial canvas, reversed text */
+  --color-link: #3860be;              /* Signal Blue — inline text links */
+  --color-red-shade: #ac1811;         /* Deep Brand Red Shade — low-prominence tags */
+
+  /* Surface & Background */
+  --color-surface-white: #ffffff;     /* Primary page/card surface */
+  --color-surface-neutral: #f2f2f2;  /* Light Neutral — pill badges, quiet UI chrome */
+  --color-surface-charcoal: #25282b; /* Charcoal Institutional Panel — footer, data panels */
+  --color-overlay-white: rgba(255, 255, 255, 0.1); /* Translucent white overlay */
+
+  /* Neutrals & Text */
+  --color-text-headline: #25282b;    /* Charcoal Headline — headings on light surfaces */
+  --color-text-body: #7e7e7e;        /* Secondary Body Grey — body copy, meta text */
+  --color-text-form: #333333;        /* Form Text Grey — input borders, ghost button text */
+  --color-text-disabled: #bebebe;    /* Disabled Grey — inactive chips */
+  --color-divider-light: rgba(255, 255, 255, 0.25); /* Translucent white divider */
+
+  /* Semantic */
+  --color-band-red: #e60000;         /* Full-width red band divider */
+  --color-tag-border: #e60000;       /* Tag pill red border */
+
+  /* Background shortcuts */
+  --background: var(--color-surface-white);
+  --foreground: var(--color-text-headline);
+
+  /* ----- 2. Typography ----- */
+  --font-primary: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Font weights */
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Font sizes — Typography Hierarchy from DESIGN.md */
+  --font-size-display-xl: 144px;     /* Display / Hero XL */
+  --font-size-display-lg: 126px;     /* Display / Hero L */
+  --font-size-display-md: 90px;      /* Display / Hero M */
+  --font-size-display-impact: 70px;  /* Display / Impact */
+  --font-size-h1: 48px;              /* H1 — Light/Bold */
+  --font-size-h2: 40px;              /* H2 — Light/Bold */
+  --font-size-h3: 32px;              /* H3 — Bold */
+  --font-size-h4: 24px;              /* H4 — Bold/Light */
+  --font-size-h5: 20px;              /* H5 — Bold */
+  --font-size-lead: 20px;            /* Lead Body */
+  --font-size-body-lg: 18px;         /* Body Large */
+  --font-size-body-base: 16px;       /* Body Base */
+  --font-size-label: 16px;           /* Label Uppercase */
+  --font-size-eyebrow: 14px;         /* Eyebrow / Date */
+  --font-size-tag: 14px;             /* Tag Pill */
+  --font-size-caption-upper: 14px;   /* Caption Uppercase */
+  --font-size-button-primary: 14.4px;/* Button Primary */
+  --font-size-caption: 12px;         /* Caption */
+  --font-size-micro: 12px;           /* Micro Label */
+  --font-size-button-compact: 12px;  /* Button Compact */
+
+  /* Line heights */
+  --line-height-display-xl: 0.79;
+  --line-height-display-lg: 0.90;
+  --line-height-display-md: 0.93;
+  --line-height-display-impact: 1.17;
+  --line-height-h1-light: 1.08;
+  --line-height-h1-bold: 1.00;
+  --line-height-h2: 1.10;
+  --line-height-h3: 1.25;
+  --line-height-h4-bold: 1.00;
+  --line-height-h4-light: 1.42;
+  --line-height-h5: 1.30;
+  --line-height-lead: 1.40;
+  --line-height-body-lg: 1.56;
+  --line-height-body-base: 1.38;
+  --line-height-label: 1.50;
+  --line-height-eyebrow: 1.43;
+  --line-height-tag: 1.50;
+  --line-height-caption: 2.00;
+  --line-height-micro: 1.33;
+  --line-height-button: 1.00;
+
+  /* Letter spacing */
+  --letter-spacing-display: -1px;
+  --letter-spacing-button: 0.144px;
+  --letter-spacing-button-compact: 0.12px;
+  --letter-spacing-none: 0;
+
+  /* ----- 3. Spacing Scale ----- */
+  --spacing-2xs: 2px;   /* Hairline separators */
+  --spacing-xs: 4px;    /* Icon-to-text gap in tight controls */
+  --spacing-sm: 8px;    /* Base rhythm unit */
+  --spacing-md: 12px;   /* Card internal padding, eyebrow-to-title gap */
+  --spacing-base: 16px; /* Paragraph rhythm, card padding, pill padding */
+  --spacing-lg: 20px;   /* Section-internal spacing */
+  --spacing-xl: 24px;   /* Card-to-card spacing, column gutters */
+  --spacing-2xl: 32px;  /* Section intro-to-content breaks */
+  --spacing-3xl: 38px;  /* Band-to-next-section vertical push */
+  --spacing-4xl: 48px;  /* Mobile section padding */
+  --spacing-section-sm: 64px;  /* Tablet section rhythm */
+  --spacing-section: 96px;     /* Desktop section rhythm */
+
+  /* ----- 4. Border Radius Scale ----- */
+  --radius-hairline: 1px;       /* Inline text wraps, small badges */
+  --radius-button-tight: 2px;   /* Primary/secondary rectangle buttons */
+  --radius-card: 6px;           /* News cards, images, input fields */
+  --radius-asymmetric: 0px 6px 0px 0px; /* Featured cards (top-right only) */
+  --radius-glass-pill: 24px;    /* Translucent pills on dark hero imagery */
+  --radius-badge-pill: 32px;    /* Filled neutral pill badges */
+  --radius-cta-pill: 60px;      /* Primary red editorial CTAs */
+  --radius-circle: 50%;         /* Icon buttons, carousel arrows */
+  --radius-portrait: 100%;      /* Circular portraits, pictograms */
+
+  /* ----- 5. Breakpoints (reference only, use in @media) ----- */
+  /* --breakpoint-mobile: 600px;        */
+  /* --breakpoint-mobile-lg: 767px;     */
+  /* --breakpoint-tablet: 768px;        */
+  /* --breakpoint-laptop: 1024px;       */
+  /* --breakpoint-desktop: 1200px;      */
+  /* --breakpoint-wide: 1440px;         */
+
+  /* ----- 6. Layout ----- */
+  --max-content-width: 1440px;
+  --max-article-width: 1200px;
+  --nav-height-desktop: 64px;
+  --nav-height-mobile: 56px;
+  --gutter-desktop: 24px;
+  --gutter-mobile: 16px;
+  --padding-desktop: 32px;
+  --padding-tablet: 20px;
+  --padding-mobile: 16px;
+
+  /* ----- 7. Depth & Elevation ----- */
+  --shadow-none: none;
+  --shadow-inset-focus: inset 0 0 0 1px;
+
+  /* ----- 8. Transitions ----- */
+  --transition-fast: 150ms ease;
+  --transition-base: 200ms ease;
+  --transition-slow: 300ms ease;
+
+  /* ----- 9. Red Band ----- */
+  --band-height-desktop: 80px;
+  --band-height-mobile: 40px;
 }
 
+/* ----- Dark Mode Support ----- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--color-surface-charcoal);
+    --foreground: var(--color-white);
+
+    /* Dark mode overrides */
+    --color-surface-white: #1a1a1e;
+    --color-surface-neutral: #2a2a2e;
+    --color-text-headline: #f0f0f0;
+    --color-text-body: #a0a0a0;
+    --color-text-form: #cccccc;
+    --color-text-disabled: #555555;
+  }
+}
+
+/* ----- Tailwind v4 Theme Integration ----- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-primary);
+
+  /* Color tokens for Tailwind utility classes */
+  --color-primary: var(--color-primary);
+  --color-link: var(--color-link);
+  --color-surface-charcoal: var(--color-surface-charcoal);
+  --color-surface-neutral: var(--color-surface-neutral);
+  --color-text-headline: var(--color-text-headline);
+  --color-text-body: var(--color-text-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ============================================================
+   BASE STYLES
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-body-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-base);
+  min-height: 100vh;
+}
+
+/* ============================================================
+   TYPOGRAPHY UTILITY CLASSES
+   ============================================================ */
+
+/* Display headings — uppercase with tight tracking */
+.text-display-xl {
+  font-size: var(--font-size-display-xl);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-display-xl);
+  letter-spacing: var(--letter-spacing-display);
+  text-transform: uppercase;
+}
+
+.text-display-lg {
+  font-size: var(--font-size-display-lg);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-display-lg);
+  letter-spacing: var(--letter-spacing-display);
+  text-transform: uppercase;
+}
+
+.text-display-md {
+  font-size: var(--font-size-display-md);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-display-md);
+  text-transform: uppercase;
+}
+
+.text-display-impact {
+  font-size: var(--font-size-display-impact);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-display-impact);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+/* Heading hierarchy */
+.text-h1-light {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h1-light);
+}
+
+.text-h1-bold {
+  font-size: var(--font-size-h1);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-h1-bold);
+  letter-spacing: var(--letter-spacing-display);
+}
+
+.text-h2-light {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h2);
+}
+
+.text-h2-bold {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h2);
+}
+
+.text-h3 {
+  font-size: var(--font-size-h3);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h3);
+}
+
+.text-h4-bold {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h4-bold);
+}
+
+.text-h4-light {
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-light);
+  line-height: var(--line-height-h4-light);
+}
+
+.text-h5 {
+  font-size: var(--font-size-h5);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-h5);
+}
+
+/* Body text */
+.text-lead {
+  font-size: var(--font-size-lead);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-lead);
+}
+
+.text-body-lg {
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-lg);
+}
+
+.text-body-bold {
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-body-lg);
+}
+
+.text-body-base {
+  font-size: var(--font-size-body-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body-base);
+}
+
+/* Labels & meta */
+.text-label {
+  font-size: var(--font-size-label);
+  font-weight: var(--font-weight-extrabold);
+  line-height: var(--line-height-label);
+  text-transform: uppercase;
+}
+
+.text-eyebrow {
+  font-size: var(--font-size-eyebrow);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-eyebrow);
+}
+
+.text-tag {
+  font-size: var(--font-size-tag);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tag);
+}
+
+.text-caption-upper {
+  font-size: var(--font-size-caption-upper);
+  font-weight: var(--font-weight-regular);
+  line-height: 1.14;
+  text-transform: uppercase;
+}
+
+.text-caption {
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-caption);
+}
+
+.text-micro {
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-micro);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   BUTTON UTILITY CLASSES
+   ============================================================ */
+
+/* Primary Red Rectangle — form/utility actions */
+.btn-primary-rect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-button-primary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-button);
+  line-height: var(--line-height-button);
+  padding: 12px 10px;
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-button-tight);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+.btn-primary-rect:active {
+  opacity: 0.9;
+}
+
+/* Primary Red Pill — editorial/content CTAs */
+.btn-primary-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: var(--font-size-button-primary);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-button);
+  line-height: var(--line-height-button);
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius-cta-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+.btn-primary-pill:active {
+  opacity: 0.9;
+}
+
+/* Ghost White Rectangle — secondary form action */
+.btn-ghost-rect {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-text-form);
+  font-size: var(--font-size-button-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-button);
+  padding: 12px 10px;
+  border: 1px solid var(--color-text-form);
+  border-radius: var(--radius-button-tight);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+.btn-ghost-rect:active {
+  opacity: 0.9;
+}
+
+/* Glass Pill — secondary CTA on dark hero imagery */
+.btn-glass-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-overlay-white);
+  color: var(--color-white);
+  font-weight: var(--font-weight-bold);
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-glass-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+/* Content Ghost Pill — low-emphasis inline CTA */
+.btn-content-ghost-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--color-primary);
+  font-size: var(--font-size-button-primary);
+  font-weight: var(--font-weight-bold);
+  padding: 15px;
+  border: none;
+  border-radius: var(--radius-cta-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+/* Icon Control Button — video play/pause, carousel arrows */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-white);
+  color: var(--color-text-headline);
+  border: none;
+  border-radius: var(--radius-circle);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+/* ============================================================
+   COMPONENT UTILITY CLASSES
+   ============================================================ */
+
+/* Red Divider Band */
+.red-band {
+  width: 100%;
+  height: var(--band-height-desktop);
+  background-color: var(--color-band-red);
+}
+
+@media (max-width: 600px) {
+  .red-band {
+    height: var(--band-height-mobile);
+  }
+}
+
+/* Tag Pills */
+.tag-outlined {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  color: rgba(0, 0, 0, 0.8);
+  font-size: var(--font-size-micro);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  padding: 6px;
+  border: 1px solid var(--color-tag-border);
+  border-radius: var(--radius-button-tight);
+}
+
+.tag-filled {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-surface-neutral);
+  color: var(--color-text-headline);
+  font-size: var(--font-size-tag);
+  font-weight: var(--font-weight-bold);
+  padding: 4px 12px;
+  border-radius: var(--radius-badge-pill);
+}
+
+/* Card base */
+.card {
+  background: var(--color-surface-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-none);
+  overflow: hidden;
+}
+
+.card-asymmetric {
+  background: var(--color-surface-white);
+  border-radius: var(--radius-asymmetric);
+  box-shadow: var(--shadow-none);
+  overflow: hidden;
+}
+
+/* Institutional panel surface */
+.surface-charcoal {
+  background-color: var(--color-surface-charcoal);
+  color: var(--color-white);
+}
+
+/* ============================================================
+   LAYOUT UTILITY CLASSES
+   ============================================================ */
+
+.container-content {
+  width: 100%;
+  max-width: var(--max-content-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-desktop);
+  padding-right: var(--padding-desktop);
+}
+
+@media (max-width: 1023px) {
+  .container-content {
+    padding-left: var(--padding-tablet);
+    padding-right: var(--padding-tablet);
+  }
+}
+
+@media (max-width: 600px) {
+  .container-content {
+    padding-left: var(--padding-mobile);
+    padding-right: var(--padding-mobile);
+  }
+}
+
+/* Card grid */
+.card-grid {
+  display: grid;
+  gap: var(--gutter-desktop);
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 1199px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1023px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gutter-mobile);
+  }
+}
+
+@media (max-width: 600px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: var(--gutter-mobile);
+  }
+}
+
+/* Section spacing */
+.section-spacing {
+  padding-top: var(--spacing-section);
+  padding-bottom: var(--spacing-section);
+}
+
+@media (max-width: 1023px) {
+  .section-spacing {
+    padding-top: var(--spacing-section-sm);
+    padding-bottom: var(--spacing-section-sm);
+  }
+}
+
+@media (max-width: 600px) {
+  .section-spacing {
+    padding-top: var(--spacing-4xl);
+    padding-bottom: var(--spacing-4xl);
+  }
+}
+
+/* ============================================================
+   RESPONSIVE TYPOGRAPHY
+   ============================================================ */
+
+@media (max-width: 1023px) {
+  .text-display-xl {
+    font-size: 90px;
+  }
+  .text-display-lg {
+    font-size: 72px;
+  }
+  .text-display-md {
+    font-size: 56px;
+  }
+}
+
+@media (max-width: 767px) {
+  .text-display-xl {
+    font-size: 72px;
+  }
+  .text-display-lg {
+    font-size: 56px;
+  }
+  .text-display-md {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 600px) {
+  .text-display-xl {
+    font-size: 56px;
+  }
+  .text-display-lg {
+    font-size: 48px;
+  }
+  .text-display-md {
+    font-size: 40px;
+  }
+  .text-h1-light,
+  .text-h1-bold {
+    font-size: 36px;
+  }
+  .text-h2-light,
+  .text-h2-bold {
+    font-size: 32px;
+  }
+}
+
+/* ============================================================
+   LINK STYLES
+   ============================================================ */
+
+a {
+  color: var(--color-link);
+  text-decoration: underline;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary);
+}
+
+/* ============================================================
+   FOCUS STYLES
+   ============================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
