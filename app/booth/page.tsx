@@ -20,15 +20,14 @@ const CameraSection = dynamic(
   }
 );
 import { RedBand } from "@/components/ui/RedBand";
-import { Badge } from "@/components/ui/Badge";
 import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 
 export default function BoothPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Booth Header */}
-      <section className="bg-surface-charcoal pt-32 pb-16 relative overflow-hidden">
+      {/* Booth Header — pt accounts for fixed navbar (80px) + section spacing */}
+      <section className="bg-surface-charcoal pb-16 relative overflow-hidden" style={{ paddingTop: '180px' }}>
         {/* Background Decorative Element */}
         <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/10 -skew-x-12 translate-x-1/2" />
         
@@ -46,9 +45,6 @@ export default function BoothPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Badge variant="outlined" className="mb-4 border-white/30 text-white/80">
-              MILESTONE 2
-            </Badge>
             <h1 className="text-display-lg text-white tracking-tighter leading-none mb-6">
               PHOTO.<br />STUDIO.
             </h1>
