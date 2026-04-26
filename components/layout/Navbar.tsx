@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/Button";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
+  { label: "Studio", href: "/booth" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Our Company", href: "/company" },
   { label: "Investors", href: "/investors" },
-  { label: "Sustainable Business", href: "/sustainability" },
-  { label: "News", href: "/news" },
 ];
 
 /**
