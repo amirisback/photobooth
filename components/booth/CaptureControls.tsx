@@ -35,6 +35,8 @@ export const CaptureControls: React.FC<CaptureControlsProps> = ({
           variant="icon" 
           onClick={onToggleMirror}
           title="Toggle Mirror"
+          aria-label="Toggle Mirror Camera"
+          aria-pressed={isMirrored}
           disabled={isDisabled}
           className={cn(isMirrored && "bg-primary text-white border-primary")}
         >
@@ -44,6 +46,8 @@ export const CaptureControls: React.FC<CaptureControlsProps> = ({
           variant="icon" 
           onClick={onToggleCountdown}
           title="Toggle Timer"
+          aria-label="Toggle Countdown Timer"
+          aria-pressed={isCountdownActive}
           disabled={isDisabled}
           className={cn(isCountdownActive && "bg-primary text-white border-primary")}
         >
@@ -57,6 +61,7 @@ export const CaptureControls: React.FC<CaptureControlsProps> = ({
         disabled={isDisabled}
         className="w-24 h-24 rounded-full flex items-center justify-center shadow-xl border-4 border-white transition-transform active:scale-95"
         title="Ambil Foto"
+        aria-label="Ambil Foto"
       >
         <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
           <div className="w-12 h-12 rounded-full bg-white" />
@@ -68,6 +73,7 @@ export const CaptureControls: React.FC<CaptureControlsProps> = ({
           variant="icon" 
           onClick={onToggleCamera}
           title="Ganti Kamera"
+          aria-label="Ganti Kamera"
           disabled={isDisabled}
         >
           <RefreshCcw className="w-5 h-5" />
@@ -76,6 +82,8 @@ export const CaptureControls: React.FC<CaptureControlsProps> = ({
           variant="icon" 
           onClick={onToggleMultiShot}
           title="Multi-shot Mode"
+          aria-label="Toggle Multi-shot Mode"
+          aria-pressed={isMultiShot}
           disabled={isDisabled}
           className={cn(isMultiShot && "bg-primary text-white border-primary")}
         >

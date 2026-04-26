@@ -1,7 +1,24 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CameraSection } from "@/components/sections/CameraSection";
+import dynamic from "next/dynamic";
+import { Loader2 } from "lucide-react";
+
+// Dynamically import CameraSection to reduce initial bundle size
+const CameraSection = dynamic(
+  () => import("@/components/sections/CameraSection").then(mod => mod.CameraSection),
+  { 
+    ssr: false,
+    loading: () => (
+      <section className="py-12 bg-white relative min-h-[600px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4 text-surface-neutral">
+          <Loader2 className="w-12 h-12 animate-spin text-primary" />
+          <p className="text-body-lg font-medium">Memuat Modul Kamera...</p>
+        </div>
+      </section>
+    )
+  }
+);
 import { RedBand } from "@/components/ui/RedBand";
 import { Badge } from "@/components/ui/Badge";
 import { ChevronLeft } from "lucide-react";
