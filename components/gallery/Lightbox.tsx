@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Download, Share2, Trash2, Copy, QrCode } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { QRCodeSVG } from "qrcode.react";
+import Image from "next/image";
 import { PhotoData } from "@/app/gallery/page";
 
 interface LightboxProps {
@@ -31,7 +32,7 @@ export function Lightbox({ photo, onClose, onDelete }: LightboxProps) {
       a.click();
     } else {
       // Need to convert to JPEG
-      const img = new Image();
+      const img = new window.Image();
       img.onload = () => {
         const canvas = document.createElement("canvas");
         canvas.width = img.width;
@@ -98,10 +99,12 @@ export function Lightbox({ photo, onClose, onDelete }: LightboxProps) {
           animate={{ scale: 1, opacity: 1 }}
           className="relative max-h-[80vh] flex-1 flex justify-center"
         >
-          <img 
+          <Image 
             src={photo.url} 
             alt="Full screen view" 
-            className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+            unoptimized
+            fill
+            className="object-contain rounded-lg shadow-2xl"
           />
         </motion.div>
 

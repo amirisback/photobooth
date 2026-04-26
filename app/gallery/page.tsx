@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Download, Share2, Trash2, Image as ImageIcon, Film } from "lucide-react";
 import Link from "next/link";
 import JSZip from "jszip";
+import Image from "next/image";
 import { Lightbox } from "@/components/gallery/Lightbox";
 
 export interface PhotoData {
@@ -93,7 +94,7 @@ export default function GalleryPage() {
     // Load images
     const images = await Promise.all(stripPhotos.map(photo => {
       return new Promise<HTMLImageElement>((resolve, reject) => {
-        const img = new Image();
+        const img = new window.Image();
         img.onload = () => resolve(img);
         img.onerror = reject;
         img.src = photo.url;
@@ -212,11 +213,13 @@ export default function GalleryPage() {
                 className="group relative aspect-[3/4] bg-black/50 rounded-2xl overflow-hidden border border-white/10 cursor-pointer"
                 onClick={() => setActivePhoto(photo)}
               >
-                <img 
+                <Image 
                   src={photo.url} 
-                  alt="Captured" 
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  alt={`Captured at ${new Date(photo.timestamp).toLocaleString()}`} 
+                  unoptimized
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
                   <p className="text-xs text-white/80 mb-2">
