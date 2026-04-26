@@ -151,7 +151,7 @@
   --transition-slow: 300ms ease;
 
   /* ----- 9. Red Band ----- */
-  --band-height-desktop: 80px;
+  --band-height-desktop: 64px;
   --band-height-mobile: 40px;
 }
 
