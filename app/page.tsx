@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { RedBand } from "@/components/ui/RedBand";
+import Link from "next/link";
 import { FeatureSection } from "@/components/sections/FeatureSection";
 
 export default function Home() {
@@ -37,9 +38,11 @@ export default function Home() {
               Ciptakan kenangan digital yang tak terlupakan dengan satu klik. Pengalaman photobooth premium kini hadir di perangkat Anda.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <Button variant="primary-pill" className="px-10 py-5 h-auto text-lg">
-                Mulai Photobooth
-              </Button>
+              <Link href="/booth" className="no-underline">
+                <Button variant="primary-pill" className="px-10 py-5 h-auto text-lg">
+                  Mulai Photobooth
+                </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
