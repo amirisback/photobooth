@@ -1,0 +1,1 @@
+Kerjakan issue https://github.com/amirisback/photobooth/issues/3, buatkan branch baru yang mengikuti naming convention, kerjakan issue tersebut di branch baru. ketika sudah selesai, buat pr ke development branch.
