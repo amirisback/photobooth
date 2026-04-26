@@ -694,3 +694,34 @@ a {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
+
+/* ============================================================
+   CAMERA & VIDEO UTILITIES
+   ============================================================ */
+
+.mirror-x {
+  transform: scaleX(-1);
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+}
+
+@media (min-width: 1024px) {
+  .video-container {
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.video-feed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
