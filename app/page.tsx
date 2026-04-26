@@ -1,65 +1,54 @@
 import Image from "next/image";
+import { Button } from "@/components/ui/Button";
+import { RedBand } from "@/components/ui/RedBand";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center bg-surface-charcoal overflow-hidden">
+        {/* Hero Image */}
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/images/hero.png"
+          alt="Global Network"
+          fill
+          className="object-cover opacity-40"
           priority
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+        
+        <div className="container-content relative z-10 text-center flex flex-col items-center animate-in fade-in slide-in-from-bottom-10 duration-1000">
+          <h1 className="text-display-xl text-white mb-8">
+            EVERYONE.<br />CONNECTED.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lead text-white/80 max-w-2xl mb-12 mx-auto">
+            Our mission is to connect for a better future by using technology to improve people's lives and deliver on our purpose to connect Europe and Africa.
           </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <Button variant="primary-pill" className="px-8 py-4 h-auto">Learn more about us</Button>
+            <Button variant="glass-pill" className="px-8 py-4 h-auto">Our purpose</Button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      <RedBand />
+
+      {/* Content Section Placeholder */}
+      <section className="py-24 bg-surface-white">
+        <div className="container-content text-center">
+          <h2 className="text-h1-light mb-8">Latest from Vodafone</h2>
+          <p className="text-body-lg text-text-body max-w-3xl mx-auto mb-16">
+            Explore our latest news, reports, and innovations that are shaping the digital future.
+          </p>
+          <div className="h-[400px] border-2 border-dashed border-text-disabled rounded-lg flex items-center justify-center">
+            <span className="text-text-disabled uppercase tracking-widest text-sm">Content Modules Coming Soon</span>
+          </div>
         </div>
-      </main>
+      </section>
+      
+      {/* Spacer to test footer */}
+      <section className="h-[50vh] bg-surface-neutral flex items-center justify-center">
+         <span className="text-text-body italic">Scrolling down to footer...</span>
+      </section>
     </div>
   );
 }
