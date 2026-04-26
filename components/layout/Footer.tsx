@@ -5,24 +5,6 @@ import { Logo } from "@/components/ui/Logo";
 
 const FOOTER_SECTIONS = [
   {
-    title: "Our Company",
-    links: [
-      { label: "About us", href: "/about" },
-      { label: "Our purpose", href: "/purpose" },
-      { label: "Leadership", href: "/leadership" },
-      { label: "History", href: "/history" },
-    ],
-  },
-  {
-    title: "Investors",
-    links: [
-      { label: "Overview", href: "/investors" },
-      { label: "Share price", href: "/share-price" },
-      { label: "Results & reports", href: "/reports" },
-      { label: "Dividends", href: "/dividends" },
-    ],
-  },
-  {
     title: "Vodafone Websites",
     links: [
       { label: "Business", href: "/business" },
@@ -34,7 +16,6 @@ const FOOTER_SECTIONS = [
   {
     title: "Quick Links",
     links: [
-      { label: "Contact us", href: "/contact" },
       { label: "Accessibility", href: "/accessibility" },
       { label: "Privacy policy", href: "/privacy" },
       { label: "Terms & conditions", href: "/terms" },

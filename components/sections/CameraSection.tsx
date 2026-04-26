@@ -106,11 +106,11 @@ export const CameraSection: React.FC = () => {
           
           {/* Main Viewport Column */}
           <div className="flex-1">
-            <div className="text-center mb-6">
-              <h2 className="text-h2-bold text-text-headline mb-2 uppercase tracking-tighter">
+            <div className="text-center mb-10">
+              <h2 className="text-h2-bold text-text-headline mb-4 uppercase tracking-widest leading-snug">
                 Live Preview
               </h2>
-              <p className="text-body-lg text-text-body">
+              <p className="text-body-lg text-text-body leading-loose tracking-wide">
                 Siapkan gaya terbaikmu sebelum memotret.
               </p>
             </div>

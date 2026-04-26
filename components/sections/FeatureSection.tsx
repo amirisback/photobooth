@@ -26,11 +26,11 @@ export function FeatureSection() {
   return (
     <section className="section-spacing bg-surface-white">
       <div className="container-content">
-        <div className="text-center mb-16">
-          <h2 className="text-h1-light text-text-headline mb-4 uppercase tracking-tight">
+        <div className="text-center mb-20">
+          <h2 className="text-h1-light text-text-headline uppercase tracking-widest leading-snug">
             Fitur Utama Kami
           </h2>
-          <p className="text-body-lg text-text-body max-w-2xl mx-auto">
+          <p className="text-body-lg text-text-body w-full mx-auto">
             Temukan kemudahan dalam setiap jepretan dengan teknologi photobooth digital tercanggih.
           </p>
         </div>
@@ -45,11 +45,11 @@ export function FeatureSection() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               className="flex flex-col items-center text-center p-8 bg-surface-neutral/30 rounded-lg border border-surface-neutral hover:border-primary/20 transition-colors"
             >
-              <div className="w-16 h-16 flex items-center justify-center bg-primary text-white rounded-full mb-6">
+              <div className="w-24 h-24 flex items-center justify-center bg-primary text-white rounded-full mb-16">
                 <feature.icon size={32} />
               </div>
-              <h3 className="text-h3 text-text-headline mb-4">{feature.title}</h3>
-              <p className="text-body-base text-text-body">
+              <h3 className="text-h3 text-text-headline mb-6 tracking-wide">{feature.title}</h3>
+              <p className="text-body-base text-text-body leading-loose tracking-wide">
                 {feature.description}
               </p>
             </motion.div>

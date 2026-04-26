@@ -5,15 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "Studio", href: "/booth" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Our Company", href: "/company" },
-  { label: "Investors", href: "/investors" },
 ];
 
 /**
@@ -48,19 +45,21 @@ export function Navbar() {
             : "bg-transparent h-[80px]"
         )}
       >
-        <div className="container-content w-full flex items-center justify-between">
-          <Link href="/" className="flex items-center group transition-transform hover:scale-105">
-            <Logo size={40} />
-          </Link>
+        <div className="container-content w-full grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center">
+          <div className="flex justify-start">
+            <Link href="/" className="flex items-center group transition-transform hover:scale-105 no-underline">
+              <span className={cn("text-2xl font-black tracking-widest", isScrolled ? "text-text-headline" : "text-white")}>PHOTOBOOTH</span>
+            </Link>
+          </div>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center justify-center gap-16">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-body-base font-bold transition-colors hover:text-primary relative py-1 no-underline",
+                  "text-body-base font-bold transition-colors hover:text-primary relative py-1 no-underline tracking-widest",
                   isScrolled ? "text-text-headline" : "text-white",
                   pathname === link.href && "text-primary"
                 )}
@@ -74,20 +73,17 @@ export function Navbar() {
                 )}
               </Link>
             ))}
-            <Button 
-              variant={isScrolled ? "primary-pill" : "glass-pill"}
-              className="px-6 py-2 h-auto"
-            >
-              Contact Us
-            </Button>
           </nav>
+          
+          <div className="hidden lg:block"></div>
 
           {/* Mobile Toggle */}
-          <button
-            className="lg:hidden relative z-50 p-2"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
-          >
+          <div className="flex justify-end lg:hidden col-start-3">
+            <button
+              className="relative z-50 p-2"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label={isMobileMenuOpen ? "Close Menu" : "Open Menu"}
+            >
             <div className="w-6 h-5 flex flex-col justify-between">
               <span 
                 className={cn(
@@ -111,7 +107,8 @@ export function Navbar() {
                 )} 
               />
             </div>
-          </button>
+            </button>
+          </div>
         </div>
       </header>
 
@@ -135,22 +132,12 @@ export function Navbar() {
                   <Link
                     key={link.label}
                     href={link.href}
-                    className="text-[2rem] sm:text-[3rem] font-extrabold transition-colors hover:text-primary leading-tight no-underline"
+                    className="text-[2rem] sm:text-[3rem] font-extrabold transition-colors hover:text-primary leading-tight no-underline text-center tracking-widest"
                   >
                     {link.label}
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-4"
-              >
-                <Button variant="primary-pill" className="w-full text-lg py-4">
-                  Contact Us
-                </Button>
-              </motion.div>
             </nav>
           </motion.div>
         )}

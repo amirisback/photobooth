@@ -24,72 +24,31 @@ export default function Home() {
           {/* Subtle overlay for depth as per DESIGN.md */}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-surface-charcoal/20 to-surface-charcoal/60" />
         </div>
-        
+
         <div className="container-content relative z-10 text-center flex flex-col items-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col items-center text-center w-full gap-8"
           >
-            <h1 className="text-display-xl text-white mb-8 tracking-tighter leading-[0.8]">
-              MULAI.<br />PHOTOBOOTH.
+            <h1 className="text-display-xl text-white tracking-widest leading-snug text-center">
+              PHOTOBOOTH.
             </h1>
+
             <p className="text-lead text-white/80 max-w-2xl mb-12 mx-auto">
               Ciptakan kenangan digital yang tak terlupakan dengan satu klik. Pengalaman photobooth premium kini hadir di perangkat Anda.
             </p>
-            <div className="flex flex-wrap justify-center gap-6">
-              <Link href="/booth" className="no-underline">
-                <Button variant="primary-pill" className="px-10 py-5 h-auto text-lg">
-                  Mulai Photobooth
-                </Button>
-              </Link>
-            </div>
+
+            <Link href="/booth" className="no-underline">
+              <Button variant="primary-pill" className="px-10 py-5 h-auto text-lg">
+                Mulai Photobooth
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </section>
 
-      <RedBand />
-
-      {/* Feature Highlights Section */}
-      <FeatureSection />
-      
-      {/* Editorial Content Section - Asymmetric design as per DESIGN.md */}
-      <section className="py-24 bg-surface-neutral/10">
-        <div className="container-content">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="order-2 lg:order-1">
-              <motion.div 
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative aspect-video rounded-tr-[40px] overflow-hidden border-4 border-white shadow-2xl"
-              >
-                <Image
-                  src="/images/news-1.png"
-                  alt="Quality Experience"
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <h2 className="text-h1-bold text-text-headline mb-6 tracking-tighter">PENGALAMAN PREMIUM.</h2>
-                <p className="text-body-lg text-text-body mb-8">
-                  Kami menggabungkan kemudahan teknologi digital dengan estetika photobooth klasik untuk memberikan hasil terbaik bagi setiap momen berharga Anda.
-                </p>
-                <Button variant="ghost-rect" className="px-8">Pelajari Selengkapnya</Button>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
