@@ -1,0 +1,19 @@
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Confetti elements in corners -->
+  <g fill="#FF3B30">
+    <circle cx="80" cy="80" r="20" />
+    <rect x="150" y="40" width="15" height="40" transform="rotate(45 150 40)"/>
+    <circle cx="1000" cy="1800" r="25" />
+  </g>
+  <g fill="#34C759">
+    <circle cx="1000" cy="120" r="15" />
+    <rect x="900" y="80" width="20" height="30" transform="rotate(-30 900 80)"/>
+    <circle cx="120" cy="1840" r="18" />
+  </g>
+  <g fill="#007AFF">
+    <polygon points="120,150 140,180 100,180" />
+    <rect x="80" y="1750" width="20" height="40" transform="rotate(15 80 1750)"/>
+    <polygon points="950,1850 980,1820 980,1880" />
+  </g>
+  <rect x="30" y="30" width="1020" height="1860" fill="none" stroke="white" stroke-width="15" stroke-dasharray="30 20"/>
+</svg>
