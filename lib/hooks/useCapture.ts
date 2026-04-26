@@ -90,8 +90,25 @@ export const useCapture = ({
       }
     }
 
-    const dataUrl = canvas.toDataURL('image/png', 1.0);
-    return dataUrl;
+    return new Promise((resolve) => {
+      canvas.toBlob(async (blob) => {
+        if (!blob) {
+          resolve(null);
+          return;
+        }
+        
+        // Save to IndexedDB
+        try {
+          const { savePhoto } = await import('../idb');
+          await savePhoto(blob, activeFilterId, activeFrameId);
+        } catch (e) {
+          console.error("Failed to save photo to IndexedDB", e);
+        }
+
+        const objectUrl = URL.createObjectURL(blob);
+        resolve(objectUrl);
+      }, 'image/png', 1.0);
+    });
   }, [videoRef, isMirrored, activeFilterId, activeFrameId]);
 
   const triggerFlash = useCallback(() => {
@@ -158,8 +175,9 @@ export const useCapture = ({
   }, [isCapturing, captureSingleFrame, triggerFlash, playBeep, onPhotoTaken, onSequenceComplete]);
 
   const clearPhotos = useCallback(() => {
+    capturedPhotos.forEach(url => URL.revokeObjectURL(url));
     setCapturedPhotos([]);
-  }, []);
+  }, [capturedPhotos]);
 
   return {
     takePhoto,
