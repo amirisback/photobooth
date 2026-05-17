@@ -3,9 +3,9 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useCamera } from "@/app/hooks/use-camera";
-import { SwitchCamera, X, ImagePlus, Circle, Sparkles, Frame, Sticker } from "lucide-react";
+import { SwitchCamera, X, ImagePlus, Circle, Sparkles, Frame, Sticker, ChevronLeft, ChevronRight } from "lucide-react";
 import { borders, buildSvgString, svgToImage, type BorderDef } from "@/app/lib/border-overlays";
-import { stickers, type StickerDef } from "@/app/lib/sticker-defs";
+import { stickers, stickerCategories, type StickerDef, type StickerCategoryKey } from "@/app/lib/sticker-defs";
 
 // ── Filters ───────────────────────────────────────────────────────────────────
 const cameraFilters = [
@@ -41,11 +41,22 @@ export default function CameraPage() {
   const { videoRef, isActive, error, startCamera, stopCamera, switchCamera, captureFrame } = useCamera();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const viewfinderRef = useRef<HTMLDivElement>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+
+  // ── Desktop scroll arrows for strip ──
+  const scrollStrip = useCallback((dir: "left" | "right") => {
+    if (!stripRef.current) return;
+    const amount = dir === "left" ? -200 : 200;
+    stripRef.current.scrollBy({ left: amount, behavior: "smooth" });
+  }, []);
 
   const [activeFilter, setActiveFilter] = useState(cameraFilters[0]);
   const [activeBorder, setActiveBorder] = useState<BorderDef>(borders[0]);
   const [placedStickers, setPlacedStickers] = useState<PlacedSticker[]>([]);
   const [tabMode, setTabMode] = useState<TabMode>("filters");
+  const [stickerCat, setStickerCat] = useState<StickerCategoryKey>("all");
+
+  const filteredStickers = stickerCat === "all" ? stickers : stickers.filter((s) => s.category === stickerCat);
 
   // Drag state for stickers
   const dragRef = useRef<{ id: string; startX: number; startY: number; origX: number; origY: number } | null>(null);
@@ -230,8 +241,41 @@ export default function CameraPage() {
             )}
           </div>
 
-          {/* Strip */}
-          <div className="flex gap-2.5 overflow-x-auto px-4 py-1 max-w-full" style={{ scrollbarWidth: "none" }}>
+          {/* Category sub-tabs for stickers */}
+          {tabMode === "stickers" && (
+            <div className="flex gap-1 overflow-x-auto px-4 max-w-full" style={{ scrollbarWidth: "none" }}>
+              {stickerCategories.map((cat) => (
+                <button key={cat.key} onClick={() => setStickerCat(cat.key)}
+                  className={`px-2.5 py-1 rounded-full text-[10px] font-semibold whitespace-nowrap transition-all ${
+                    stickerCat === cat.key ? "bg-white/20 text-white" : "text-white/40 hover:text-white/60"
+                  }`}>
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          )}
+
+          {/* Strip with desktop scroll arrows */}
+          <div className="relative group/strip w-full">
+            {/* Left arrow — desktop only */}
+            <button
+              onClick={() => scrollStrip("left")}
+              className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 items-center justify-center rounded-full bg-black/60 backdrop-blur-sm text-white/80 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover/strip:opacity-100 shadow-lg"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+
+            {/* Right arrow — desktop only */}
+            <button
+              onClick={() => scrollStrip("right")}
+              className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-8 items-center justify-center rounded-full bg-black/60 backdrop-blur-sm text-white/80 hover:text-white hover:bg-black/80 transition-all opacity-0 group-hover/strip:opacity-100 shadow-lg"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+
+          <div ref={stripRef} className={`flex gap-2.5 overflow-x-auto px-4 md:px-10 py-1 max-w-full ${tabMode !== "stickers" ? "justify-center" : ""}`} style={{ scrollbarWidth: "none" }}>
             {tabMode === "filters" && cameraFilters.map((f) => (
               <button key={f.id} onClick={() => setActiveFilter(f)}
                 className={`flex flex-col items-center gap-1 shrink-0 transition-all ${activeFilter.id === f.id ? "scale-110" : "opacity-60"}`}>
@@ -251,16 +295,17 @@ export default function CameraPage() {
                 <span className={`text-[9px] font-semibold ${activeBorder.id === b.id ? "text-white" : "text-white/50"}`}>{b.label}</span>
               </button>
             ))}
-            {tabMode === "stickers" && stickers.map((s) => (
+            {tabMode === "stickers" && filteredStickers.map((s) => (
               <button key={s.id} onClick={() => addSticker(s)}
                 className="flex flex-col items-center gap-1 shrink-0 transition-all hover:scale-110 active:scale-95">
                 <div className="w-12 h-12 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center p-1">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={s.src} alt={s.label} className="w-full h-full object-contain" />
+                  <img src={s.src} alt={s.label} className="w-full h-full object-contain" loading="lazy" />
                 </div>
-                <span className="text-[9px] font-semibold text-white/70">{s.label}</span>
+                <span className="text-[9px] font-semibold text-white/70 max-w-[48px] truncate">{s.label}</span>
               </button>
             ))}
+          </div>
           </div>
 
           {/* Controls row */}
