@@ -45,16 +45,6 @@
 
 ---
 
-## 📸 Screenshots
-
-### Home Page
-<p align="center">
-  <img src="docs/screenshots/home-mobile.png" alt="Home Page - Mobile" width="300" />
-  <img src="docs/screenshots/home-desktop.png" alt="Home Page - Desktop" width="500" />
-</p>
-
----
-
 ## 🚀 Tech Stack
 
 - **Framework:** [Next.js 16](https://nextjs.org) (App Router, Webpack)
