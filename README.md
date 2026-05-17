@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="docs/screenshots/home-desktop.png" alt="PhotoBooth Pro" width="600" />
-</p>
-
 <h1 align="center">📸 PhotoBooth Pro</h1>
 
 <p align="center">
