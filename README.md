@@ -53,16 +53,6 @@
   <img src="docs/screenshots/home-desktop.png" alt="Home Page - Desktop" width="500" />
 </p>
 
-### Camera with Filters
-<p align="center">
-  <img src="docs/screenshots/camera-filters.png" alt="Camera with Filters" width="600" />
-</p>
-
-### Camera with Stickers
-<p align="center">
-  <img src="docs/screenshots/camera-stickers.png" alt="Camera with Dudu & Bubu Stickers" width="600" />
-</p>
-
 ---
 
 ## 🚀 Tech Stack
